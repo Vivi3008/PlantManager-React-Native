@@ -8,9 +8,9 @@ import colors from "../styles/colors";
 export function Welcome() {
   const [visible, setVisible] = useState(false);
 
-  function handleVisible() {
-    setVisible(true);
-  }
+  const handleVisible = () => {
+    visible ? setVisible(false) : setVisible(true);
+  };
   //#missaoespacial
   return (
     <View style={styles.container}>
