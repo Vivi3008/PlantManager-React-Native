@@ -12,8 +12,15 @@ import { Feather } from '@expo/vector-icons';
 import wateringImg from '../assets/watering.png';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
+import { useNavigation } from '@react-navigation/core';
 
 export function Welcome() {
+  const navigation = useNavigation();
+
+  function handleStart() {
+    navigation.navigate('UserIdentification');
+  }
+
   return (
     <View style={styles.wrapper}>
       <Text style={styles.title}>
@@ -29,7 +36,11 @@ export function Welcome() {
         sempre que precisar.
       </Text>
 
-      <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={styles.button}
+        onPress={handleStart}
+      >
         <Feather name='chevron-right' style={styles.buttonIcon} />
       </TouchableOpacity>
     </View>
