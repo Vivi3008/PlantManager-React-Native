@@ -1,5 +1,5 @@
-import { useRoute } from '@react-navigation/native';
 import React from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { View, StyleSheet, Text } from 'react-native';
 
 import { Button } from '../components/Button';
@@ -8,20 +8,26 @@ import fonts from '../styles/fonts';
 
 export function Confirmation() {
   const { params } = useRoute();
+  const navigation = useNavigation();
+
+  function handleMoveOn() {
+    const name = params?.name || '';
+    navigation.navigate('PlantSelect', { name });
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.emoji}>😁</Text>
 
-        <Text style={styles.title}>Prontinho {params?.userName}!</Text>
+        <Text style={styles.title}>Prontinho {params?.name}!</Text>
 
         <Text style={styles.subtitle}>
           Agora vamos começar a cuidar das suas plantinhas com muito cuidado.
         </Text>
 
         <View style={styles.footer}>
-          <Button title='Começar' />
+          <Button title='Começar' onPress={handleMoveOn} />
         </View>
       </View>
     </View>

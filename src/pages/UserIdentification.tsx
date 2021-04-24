@@ -23,8 +23,7 @@ export function UserIdentification() {
   const navigation = useNavigation();
 
   function handleStart(name: string) {
-    const userName = name;
-    navigation.navigate('Confirmation', { userName });
+    navigation.navigate('Confirmation', { name });
   }
 
   function handleInputBlur() {
