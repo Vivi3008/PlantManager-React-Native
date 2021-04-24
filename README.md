@@ -67,6 +67,6 @@ _Rode o aplicativo pelo Expo instalado no seu celular ou rodando no seu emulador
 
 <hr>
 <div align="center">
-  <sub>Copyright © 2021-present, ViviRamos.</sub>
+  <sub>feito com 💜 por ViviRamos</sub>
 </div>
 <hr>
