@@ -45,21 +45,23 @@ Plant Manager é um aplicativo que ajuda você a controlar e acompanhar o cuidad
 _Clone o projeto e acesse a pasta_
 
 ```bash
-$ git clone https://github.com/hmartiins/plantmanager
-$ cd plantmanager
+$ git clone https://github.com/Vivi3008/PlantManager-React-Native.git
+$ cd PlantManager-React-Native
 ```
 
 _Siga os passos abaixo_
 
 ```bash
 # Install the dependencies
-$ yarn install
+$ expo install
 
 # Finally, run the api service in a development environment :)
-$ yarn start
+$ expo start
 
 # Well done, PlantManager is started!
 ```
+
+_Rode o aplicativo pelo Expo instalado no seu celular ou rodando no seu emulador_
 
 <br>
 
