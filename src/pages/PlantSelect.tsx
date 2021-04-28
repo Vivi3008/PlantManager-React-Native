@@ -5,6 +5,7 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { EnviromentButton } from '../components/EnviromentButton';
 import { Header } from '../components/Header';
 import { PlantCardPrimary } from '../components/PlantCardPrimary';
+import { Load } from '../components/Load';
 
 import api from '../services/api';
 import colors from '../styles/colors';
@@ -32,16 +33,26 @@ export function PlantSelect() {
   const { params } = useRoute();
   const [enviroments, setEnviroments] = useState<EnvironmentProps[]>([]);
   const [plants, setPlants] = useState<PlantProps[]>([]);
+  const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
   const [enviromentSelected, setEnviromentSelected] = useState('all');
+  const [loading, setLoading] = useState(true);
 
-  const handleEnviromentSelected = (key: string) => {
-    setEnviromentSelected(key);
+  const handleEnviromentSelected = (enviroment: string) => {
+    setEnviromentSelected(enviroment);
+
+    if (enviroment === 'all') return setFilteredPlants(plants);
+
+    const filtered = plants.filter((plant) => {
+      plant.environments.includes(enviroment);
+    });
+
+    setFilteredPlants(filtered);
   };
 
   useEffect(() => {
     async function fetchEnvironment() {
       const { data } = await api.get(
-        'plants_environments?_sort=title&_order=asc'
+        'plants_environments?_sort=title&order=asc'
       );
       setEnviroments([
         {
@@ -59,10 +70,14 @@ export function PlantSelect() {
     async function fetchPlants() {
       const { data } = await api.get('plants?_sort=name&_order=asc');
       setPlants(data);
+      setFilteredPlants(plants);
+      setLoading(false);
     }
 
     fetchPlants();
   }, []);
+
+  if (loading) return <Load />;
 
   return (
     <View style={styles.container}>
@@ -91,7 +106,8 @@ export function PlantSelect() {
 
       <View style={styles.plants}>
         <FlatList
-          data={plants}
+          data={filteredPlants}
+          keyExtractor={(item) => String(item.id)}
           renderItem={({ item }) => <PlantCardPrimary data={item} />}
           showsVerticalScrollIndicator={false}
           numColumns={2}
